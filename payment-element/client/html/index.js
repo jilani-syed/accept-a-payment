@@ -22,7 +22,14 @@ document.addEventListener('DOMContentLoaded', async () => {
   } = await fetch('/create-payment-intent').then(r => r.json());
   if (backendError) {
     addMessage(backendError.message);
+    return;
   }
+
+  if (!clientSecret) {
+    addMessage('No client secret returned from the server.');
+    return;
+  }
+
   addMessage(`Client secret returned.`);
 
   // Initialize Stripe Elements with the PaymentIntent's clientSecret,
