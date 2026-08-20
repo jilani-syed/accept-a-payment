@@ -160,6 +160,8 @@ app.post("/webhook",
   }
 );
 
-app.listen(4242, (): void =>
-  console.log(`Node server listening on port ${4242}!`)
+const port = Number(process.env.PORT) || 4242;
+
+app.listen(port, "0.0.0.0", (): void =>
+  console.log(`Node server listening on port ${port}!`)
 );
