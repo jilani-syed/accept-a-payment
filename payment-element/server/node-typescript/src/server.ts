@@ -148,12 +148,12 @@ app.post("/webhook",
       // Funds have been captured
       // Fulfill any orders, e-mail receipts, etc
       // To cancel the payment after capture you will need to issue a Refund (https://stripe.com/docs/api/refunds).
-      console.log(`🔔  Webhook received: ${pi.object} ${pi.status}!`);
+      console.log(`🔔 Webhook received: event=${event.id} type=${event.type} payment_intent=${pi.id} status=${pi.status}`);
       console.log("💰 Payment captured!");
     } else if (eventType === "payment_intent.payment_failed") {
       // Cast the event into a PaymentIntent to make use of the types.
       const pi: Stripe.PaymentIntent = data.object as Stripe.PaymentIntent;
-      console.log(`🔔  Webhook received: ${pi.object} ${pi.status}!`);
+      console.log(`🔔 Webhook received: event=${event.id} type=${event.type} payment_intent=${pi.id} status=${pi.status}`);
       console.log("❌ Payment failed.");
     }
     res.sendStatus(200);
